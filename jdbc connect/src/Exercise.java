@@ -122,7 +122,7 @@ public static void main(String[] args) throws Exception {
     exercise.selectGroup();
     exercise.selectHaving();
     exercise.selectjoin();
-    DatabaseManager.closeConnection();
+   // DatabaseManager.closeConnection();
 }
 }
 
