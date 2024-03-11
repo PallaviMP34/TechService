@@ -4,37 +4,28 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseManager {
-    private static Connection con;
-
-    // Private constructor to prevent instantiation
-    public DatabaseManager() {}
+   
 
     public  Connection getConnection() {
-        if (con == null) {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library", "root", "");
-                System.out.println("Connected to the database!");
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-                System.err.println("Error: MySQL JDBC Driver not found!");
-            } catch (SQLException e) {
-                e.printStackTrace();
-                System.err.println("Error: Failed to connect to the database!");
-            }
-        }
-        return con;
+        ResourceBundle rd
+        = ResourceBundle.getBundle("resource.system", Locale.US);
+
+    String jdbcUrl = rd.getString("url");
+    String username = rd.getString("userName");
+    String password = rd.getString("");
+    String driverClass=rd.getString("driver");
+    Connection connection = null;
+    try {
+        // Step 1: Register JDBC driver
+        Class.forName(driverClass);
+        // Step 2: Open a connection
+        System.out.println("Connecting to database...");
+        connection = DriverManager.getConnection(jdbcUrl, username, password);
     }
-    // public static void closeConnection() {
-    //     if (con != null) {
-    //         try {
-    //             con.close();
-    //             System.out.println("Database connection closed.");
-    //         } catch (SQLException e) {
-    //             e.printStackTrace();
-    //             System.err.println("Error: Failed to close database connection!");
-    //         }
-    //     }
-    // }
+    catch(Exception e ){
+        e.printStackTrace();
+    }
+       return connection;
+    }
 }
 

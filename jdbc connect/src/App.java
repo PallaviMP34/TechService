@@ -174,6 +174,6 @@ public class App {
                     System.out.println("Invalid choice. Please enter a number from 1 to 5.");
             }
         } while (choice != 5);
-        DatabaseManager.closeConnection();
+       // DatabaseManager.closeConnection();
     }
 }
